@@ -1,12 +1,10 @@
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Client extends Persoana {
 
-    private List<Accident> accidente;
-    private List<ContractAsigurare> contracte;
+    private ArrayList<Accident> accidente;
+    private ArrayList<ContractAsigurare> contracte;
 
     public Client(String nume, String prenume, String cnp) {
         super(nume, prenume, cnp);
@@ -15,8 +13,31 @@ public class Client extends Persoana {
         this.contracte = new ArrayList<ContractAsigurare>();
     }
 
+    public void salveaza() {
+        ColectieClienti colectie = new ColectieClienti();
+        colectie.adaugaClient(this);
+    }
+
     public void adaugaAccident(Accident accident) {
-        accidente.add(accident);
+        ColectieClienti colectie = new ColectieClienti();
+        for (Client c : colectie.getClienti()) {
+            if (c.getCnp().equals(this.getCnp())) {
+                c.accidente.add(accident);
+                colectie.actualizeazaClient(c);
+                break;
+            }
+        }
+    }
+
+    public void adaugaContract(ContractAsigurare contractAsigurare) {
+        ColectieClienti colectie = new ColectieClienti();
+        for (Client c : colectie.getClienti()) {
+            if (c.getCnp().equals(this.getCnp())) {
+                c.contracte.add(contractAsigurare);
+                colectie.actualizeazaClient(c);
+                break;
+            }
+        }
     }
 
     public int getNrAccidenteUltimii5Ani() {
@@ -26,14 +47,18 @@ public class Client extends Persoana {
         int numarAccidente = 0;
         for (int i = 0; i < accidente.size(); i++) {
             Accident accident = accidente.get(i);
-            if (anCurent - accident.getAnAccident() > 5) {
+            if (anCurent - accident.getAnAccident() <= 5) {
                 numarAccidente++;
             }
         }
         return numarAccidente;
     }
 
-    public void adaugaContract(ContractAsigurare contractAsigurare) {
-        contracte.add(contractAsigurare);
+    public ArrayList<Accident> getAccidente() {
+        return new ArrayList<>(accidente);
+    }
+
+    public ArrayList<ContractAsigurare> getContracte() {
+        return new ArrayList<>(contracte);
     }
 }

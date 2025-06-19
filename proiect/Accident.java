@@ -1,4 +1,3 @@
-
 import java.util.Date;
 
 public class Accident {
@@ -13,5 +12,13 @@ public class Accident {
 
     public int getAnAccident() {
         return dataAccident.getYear();
+    }
+
+    public Date getDataAccident() {
+        return dataAccident;
+    }
+
+    public double getPagubeInEuro() {
+        return pagubeInEuro;
     }
 }

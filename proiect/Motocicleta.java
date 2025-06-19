@@ -1,4 +1,7 @@
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Motocicleta extends Vehicul {
 
     private Motor motor;
@@ -7,6 +10,21 @@ public class Motocicleta extends Vehicul {
         super(marca, model, anFabricatie, dotari, pretInitial);
         this.motor = motor;
         this.indiceRisc = 150;
+    }
+
+    @Override
+    protected void salveaza() {
+        try (FileWriter writer = new FileWriter("vehicule.csv", true)) {
+            writer.append(marca).append(",");
+            writer.append(model).append(",");
+            writer.append(String.valueOf(anFabricatie)).append(",");
+            writer.append(dotari.toString()).append(",");
+            writer.append(String.valueOf(pretInitial)).append(",");
+            writer.append(String.valueOf(motor.getPutere())).append(",");
+            writer.append(motor.getEuro()).append(",");
+            writer.append(motor.getCombustibil().toString()).append("\n");
+        } catch (IOException e) {
+        }
     }
 
     @Override

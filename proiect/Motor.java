@@ -1,4 +1,3 @@
-
 public class Motor {
 
     private int putere;
@@ -9,6 +8,18 @@ public class Motor {
         this.putere = putere;
         this.euro = euro;
         this.combustibil = combustibil;
+    }
+
+    public TipCombustibil getCombustibil() {
+        return combustibil;
+    }
+
+    public int getPutere() {
+        return putere;
+    }
+
+    public String getEuro() {
+        return euro;
     }
 
     public double getMultiplicatorRisc() {
@@ -23,11 +34,13 @@ public class Motor {
 
     public double calculeazaPoluarea() {
         double indicePoluare = 0;
+
         if (combustibil == TipCombustibil.Diesel) {
             indicePoluare = 120;
         } else if (combustibil == TipCombustibil.Petrol) {
             indicePoluare = 100;
         }
+
         switch (euro) {
             case "Euro 1":
                 indicePoluare = indicePoluare * 1.6;

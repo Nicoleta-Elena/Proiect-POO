@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class ContractAsigurare {
@@ -25,6 +24,40 @@ public class ContractAsigurare {
         this.numarUnic = numarUnicCurent;
         numarUnicCurent++;
         this.status = StatusContract.Activ;
+
+        salveaza();
+    }
+
+    public int getNumarUnic() {
+        return numarUnic;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public double getRataFinala() {
+        return rataFinala;
+    }
+
+    public Masina getMasina() {
+        return masina;
+    }
+
+    public FrecventaPlata getFrecventaPlata() {
+        return frecventaPlata;
+    }
+
+    public StatusContract getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusContract statusNou) {
+        this.status = statusNou;
+    }
+
+    private void salveaza() {
+
     }
 
     public double calculeazaSumaAsigurata() {
@@ -105,25 +138,12 @@ public class ContractAsigurare {
         return reducere;
     }
 
-    public int getNumarUnic() {
-        return numarUnic;
-    }
-
-    public void setStatus(StatusContract statusNou) {
-        this.status = statusNou;
-    }
-
     public ContractAsigurare renoieste(Masina masinaNoua) {
         this.status = StatusContract.Inactiv;
         return new ContractAsigurare(this.client, masinaNoua, this.riscuri, this.frecventaPlata);
     }
 
-    public Client getClient() {
-        return client;
+    public ArrayList<TipRisc> getRiscuri() {
+        return new ArrayList<>(riscuri);
     }
-
-    public double getRataFinala() {
-        return rataFinala;
-    }
-
 }

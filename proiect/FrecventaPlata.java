@@ -1,4 +1,3 @@
-
 public enum FrecventaPlata {
     Lunar,
     Semestrial,
